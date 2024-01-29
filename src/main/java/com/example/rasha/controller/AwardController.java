@@ -1,5 +1,5 @@
 package com.example.rasha.controller;
-import com.example.rasha.service.AwardService;
+import com.example.rasha.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,11 +9,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class AwardController {
 
     @Autowired
-    private AwardService awardService;
+    private MovieService movieService;
 
     @PostMapping("/upload")
     public String uploadFile(@RequestParam("file") MultipartFile file) {
-        awardService.importCSV(file);
+        movieService.importCSV(file);
         return "File uploaded successfully!";
     }
 }

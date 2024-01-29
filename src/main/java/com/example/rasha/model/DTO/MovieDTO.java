@@ -1,5 +1,5 @@
-package com.example.rasha.model;
-import jakarta.persistence.*;
+package com.example.rasha.model.DTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,19 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "awards")
-public class Award {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class MovieDTO {
     private String year;
     private String category;
     private String nominee;
     private String additionalInfo;
-    private boolean won;
-
+    private String won;
 }
-
