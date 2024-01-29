@@ -46,9 +46,9 @@ public class MovieController {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(movieJson);
     }
-    @GetMapping("/Search/{search}")
-    public ResponseEntity<String> getMovieDetailsBySearch(@PathVariable String search) {
-        String movieJson = omdbMovieService.getMovieDetailsBySearch(search);
+    @GetMapping("/Search/{search}/{page}")
+    public ResponseEntity<String> getMovieDetailsBySearch(@PathVariable String search,@PathVariable int page) {
+        String movieJson = omdbMovieService.getMovieDetailsBySearch(search, page);
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(movieJson);

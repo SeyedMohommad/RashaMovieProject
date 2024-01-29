@@ -31,7 +31,6 @@ public class OMDBMovieService {
         this.objectMapper = objectMapper;
     }
 
-    // Constructor
 
 
 
@@ -39,19 +38,17 @@ public class OMDBMovieService {
         String url = apiUrl + "?t=" + title + "&apikey=" + apiKey;
         return restTemplate.getForObject(url, String.class);
     }
-    public String getMovieDetailsBySearch(String search) {
-        String url = apiUrl + "?s=" + search + "&apikey=" + apiKey;
+    public String getMovieDetailsBySearch(String search,int page) {
+        String url = apiUrl + "?s=" + search + "&apikey=" + apiKey+"&page="+page;
         return restTemplate.getForObject(url, String.class);
     }
     public String getMovieDetailsByIMDBId(String imdbId) {
         String url = apiUrl + "?i=" + imdbId + "&apikey=" + apiKey;
         return restTemplate.getForObject(url, String.class);
     }
+    @Transactional
     public OMDBMovie rateToTheMovie(String imdbId, String value,String source){
-        OMDBMovieDTO omdbMovieDTO = new OMDBMovieDTO();
-        System.out.println("Helooooooooooo");
-        System.out.println(value);
-        System.out.println(source);
+        OMDBMovieDTO omdbMovieDTO;
         String omdbMovieStr = getMovieDetailsByIMDBId(imdbId);
         try {
             omdbMovieDTO = objectMapper.readValue(omdbMovieStr,OMDBMovieDTO.class);
@@ -72,7 +69,7 @@ public class OMDBMovieService {
         }
 
     }
-    @Transactional
+
     public OMDBMovie convertDtoToEntity(OMDBMovieDTO dto) {
         OMDBMovie movie = new OMDBMovie();
         movie.setTitle(dto.getTitle());
