@@ -13,6 +13,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
@@ -58,6 +59,15 @@ public class MovieService {
         movie.setWon(movieDTO.getWon());
         // Set any other fields as needed
         return movie;
+    }
+
+    public List<Movie> getAllMovies(){
+        return movieRepository.findAll();
+    }
+    public List<Movie> filterByWon() {
+        return getAllMovies().stream()
+                .filter(movie -> !"NO".equalsIgnoreCase(movie.getWon()))
+                .collect(Collectors.toList());
     }
 }
 
