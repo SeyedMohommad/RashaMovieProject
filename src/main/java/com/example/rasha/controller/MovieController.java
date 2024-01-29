@@ -1,5 +1,7 @@
 package com.example.rasha.controller;
+import com.example.rasha.model.DTO.OMDBMovieDTO;
 import com.example.rasha.model.Movie;
+import com.example.rasha.model.OMDBMovie;
 import com.example.rasha.service.MovieService;
 import com.example.rasha.service.OMDBMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +32,9 @@ public class MovieController {
     public List<Movie> winners(){
         return movieService.filterByWon();
     }
-    @GetMapping("/SearchByID/{ImdbId}")
-    public ResponseEntity<String> searchByImdbId(@PathVariable String ImdbId) {
-        String movieJson = omdbMovieService.getMovieDetailsByIMDBId(ImdbId);
+    @GetMapping("/SearchByID/{imdbId}")
+    public ResponseEntity<String> searchByImdbId(@PathVariable String imdbId) {
+        String movieJson = omdbMovieService.getMovieDetailsByIMDBId(imdbId);
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(movieJson);
@@ -52,4 +54,9 @@ public class MovieController {
                 .body(movieJson);
     }
 
+    @GetMapping("/Rating/{imdbId}&{source}&{value}")
+    public ResponseEntity<OMDBMovie> ratingToMovie(@PathVariable String imdbId, @PathVariable String source, @PathVariable String value){
+        OMDBMovie omdbMovie = omdbMovieService.rateToTheMovie(imdbId,source,value);
+        return ResponseEntity.ok(omdbMovie);
+    }
 }
