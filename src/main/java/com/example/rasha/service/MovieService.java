@@ -50,7 +50,7 @@ public class MovieService {
         }
     }
     // Method to convert MovieDTO to Movie entity
-    private Movie convertToMovieEntity(MovieDTO movieDTO) {
+    public Movie convertToMovieEntity(MovieDTO movieDTO) {
         Movie movie = new Movie();
         movie.setYear(movieDTO.getYear());
         movie.setCategory(movieDTO.getCategory());
